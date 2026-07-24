@@ -1,7 +1,18 @@
 name: Build RPM Package
 
 on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
   workflow_dispatch:
+    inputs:
+      publish_release:
+        type: boolean
+        default: false
+
+      tag_name:
+        type: string
 
 jobs:
   build:
@@ -19,3 +30,25 @@ jobs:
         with:
           path: output
           if-no-files-found: error
+
+  release:
+    if: ${{ inputs.publish_release }}
+    runs-on: ubuntu-latest
+    needs: build
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Download artifact
+        uses: actions/download-artifact@v8
+        with:
+          path: output
+
+      - name: Publish release
+        run: gh release create "$REL_TAG_NAME" --title "Release $REL_TAG_NAME" --generate-notes output/x86_64/*.rpm
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+          REL_TAG_NAME: ${{ inputs.tag_name }}
