@@ -6,8 +6,8 @@ Unofficial RPM builds of Epson inkjet printer drivers.
 
 1. Download
 
-   Downlaod pre-built RPM package from [nightly.link](https://nightly.link/bciireal/epson-inkjet-printer-driver-rpm-build/workflows/build/main?preview) and check the checksum in [Github Actions](https://github.com/bciireal/epson-inkjet-printer-driver-rpm-build/actions).
-   
+   Downlaod pre-built RPM package from [Github Actions](https://github.com/bciireal/epson-inkjet-printer-driver-rpm-build/actions).
+
    The artifact is under `GPL-2.0-or-later` according to the driver source code.
 
 2. Install
@@ -27,3 +27,7 @@ Unofficial RPM builds of Epson inkjet printer drivers.
 - Method 2
 
   ~~Claude! Build this project!~~
+
+## TODO
+
+- [ ] auto post artifact to Github release
