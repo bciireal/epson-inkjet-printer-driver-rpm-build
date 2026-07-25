@@ -27,3 +27,9 @@ Unofficial RPM builds of Epson inkjet printer drivers.
 - Method 2
 
   ~~Claude! Build this project!~~
+
+## Ref
+
+[Old Fedora Package](https://src.fedoraproject.org/rpms/epson-inkjet-printer-escpr/tree/a993d424aa7434a924be38b96ebcf0912aaa6bb2)
+
+[Arch Linux AUR](https://aur.archlinux.org/packages/epson-inkjet-printer-escpr)

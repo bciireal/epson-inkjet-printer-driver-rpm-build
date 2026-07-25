@@ -8,7 +8,13 @@ Source0: epson-inkjet-printer-escpr-1.8.8-1.tar.gz
 
 BuildRequires: gcc
 BuildRequires: make
+BuildRequires: automake
+BuildRequires: autoconf
+BuildRequires: chrpath
+BuildRequires: libtool
 BuildRequires: cups-devel
+BuildRequires: libjpeg-devel
+BuildRequires: python3-cups
 
 Requires: cups-filesystem
 
@@ -22,26 +28,24 @@ for all EPSON ESC/P-R printers.
 %autosetup
 
 %build
-export CFLAGS="%{build_cflags} -Wno-error=implicit-function-declaration -Wno-error=implicit-int -Wno-error=int-conversion -Wno-error=incompatible-pointer-types -Wno-error=format-security"
-
+export CFLAGS="%{build_cflags} -Wno-implicit-function-declaration"
+autoreconf -vif
 ./configure \
     --prefix=%{_prefix} \
-    --libdir=%{_libdir} \
     --with-cupsfilterdir=%{_cups_serverbin}/filter \
     --with-cupsppddir=%{_datadir}/ppd
-
 %make_build
 
 %install
 %make_install
-rm -f %{buildroot}%{_libdir}/libescpr.la
-rm -f %{buildroot}%{_libdir}/libescpr.a
+rm -f %{buildroot}%{_libdir}/*.la
+rm -f %{buildroot}%{_libdir}/*.a
 rm -f %{buildroot}%{_libdir}/libescpr.so
+%ldconfig_scriptlets
 
 %files
 %license COPYING
 %doc AUTHORS NEWS README README.ja README.fr
-%{_cups_serverbin}/filter/epson-escpr
-%{_cups_serverbin}/filter/epson-escpr-wrapper
-%{_libdir}/libescpr.so.1*
+%{_cups_serverbin}/filter/epson-*
+%{_libdir}/libescpr.so.*
 %{_datadir}/ppd/epson-inkjet-printer-escpr/
