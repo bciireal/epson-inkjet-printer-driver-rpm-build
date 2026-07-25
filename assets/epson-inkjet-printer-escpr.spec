@@ -32,6 +32,7 @@ export CFLAGS="%{build_cflags} -Wno-implicit-function-declaration"
 autoreconf -vif
 ./configure \
     --prefix=%{_prefix} \
+    --libdir=%{_libdir} \
     --with-cupsfilterdir=%{_cups_serverbin}/filter \
     --with-cupsppddir=%{_datadir}/ppd
 %make_build
